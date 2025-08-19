@@ -23,7 +23,8 @@ app.get('/', (req, res) => {
 
 //設定/about路由，當訪問http://localhost:3000/about時，回應一段文字
 app.get('/about', (req, res) => {
-    res.send('This is the about page.');
+    const data = req.query.max;//有區分大小寫耶querystring
+    res.send('This is the about page. data: ' + data);
 });
 
 //啟動伺服器網址:http://localhost:3000
