@@ -5,7 +5,19 @@ const app = express();
 
 //設定根路徑路由
 app.get('/', (req, res) => {
-    res.send('Hello World from Express.js!');
+    console.log("主機名稱", req.hostname);
+    console.log("請求的路徑", req.path);
+    console.log("請求的協議", req.protocol);
+    console.log("請求的IP", req.ip);
+    console.log("請求的端口", req.socket.localPort);
+    console.log("使用者代理", req.get('User-Agent'));
+    const lang = req.get("accept-language");//"accept-language"標頭req.acceptsLanguages()
+    if (lang.startsWith("zh")) {
+        res.send('你好，Express.js!');
+    } else {
+        res.send('Hello, Express.js!');
+    }
+    //res.send('Hello World from Express.js!');
 });
 
 
