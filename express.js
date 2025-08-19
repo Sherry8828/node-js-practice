@@ -2,6 +2,14 @@
 const express = require('express');
 //載入Application程式
 const app = express();
+//設定session管理工具
+const session = require('express-session');
+app.use(session({
+    secret:"your-secret-key", //用於加密session的密鑰
+    resave: false, //每次請求都重新儲存session
+    saveUninitialized: true //未初始化的session會被儲存
+}));
+
 
 //設定根路徑路由
 app.get('/', (req, res) => {
@@ -12,14 +20,20 @@ app.get('/', (req, res) => {
     console.log("請求的端口", req.socket.localPort);
     console.log("使用者代理", req.get('User-Agent'));
     const lang = req.get("accept-language");//"accept-language"標頭req.acceptsLanguages()
+    const userId = req.session.userId; //從session中獲取userId
+
     if (lang.startsWith("zh")) {
-        res.send('你好，Express.js!');
+        res.send('你好，Express.js! 你的使用者ID是: ' + userId);
     } else {
-        res.send('Hello, Express.js!');
+       res.send('Hello, Express.js! Your user ID is: ' + userId);
     }
     //res.send('Hello World from Express.js!');
 });
 
+app.get('/hello', (req, res) => {
+    const name = req.query.name || 'World'; //從查詢字串中獲取name參數，若沒有則預設為'World'
+    res.send(`Hello, ${name}!`); //回應一段文字
+});
 
 //設定/about路由，當訪問http://localhost:3000/about時，回應一段文字
 app.get('/about', (req, res) => {
@@ -34,6 +48,7 @@ app.get('/about', (req, res) => {
 
 app.get('/user/:id', (req, res) => {
     const userId = req.params.id; //從路由參數中獲取
+    req.session.userId = userId; //將userId存入session
     if(userId === '0') {
         let data={name: "forever", age: 18};
         //res.json(data); //回傳JSON格式
