@@ -36,14 +36,22 @@ app.get('/user/:id', (req, res) => {
     const userId = req.params.id; //從路由參數中獲取
     if(userId === '0') {
         let data={name: "forever", age: 18};
-        res.json(data); //回傳JSON格式
+        //res.json(data); //回傳JSON格式
+        res.render("city.ejs",{name: "台北市", population: 2500000, description: "台北市是台灣的首都，擁有豐富的文化和歷史遺產，是一個現代化與傳統並存的城市。"});
     }else{
         let data={name: "sherry", age: 18};
-        res.json(data); //回傳JSON格式
+        //res.json(data); //回傳JSON格式
+        res.render("city.ejs",{name: "高雄市", population: 2800000, description: "高雄市是台灣的第二大城市，以其港口和工業聞名，擁有美麗的海岸線和豐富的文化活動。"});
     }
 
-    res.send(`User ID is ${userId} and name is ${req.query.name || 'unknown'}`);
+   // res.send(`User ID is ${userId} and name is ${req.query.name || 'unknown'}`);
 });
+
+//設定樣板引擎
+console.log(__dirname);
+app.set('view engine', 'ejs');
+//設定樣板檔案所在的目錄
+app.set('views', "./views");
 
 //靜態檔案服務 /static/20230919_155204.jpg
 app.use('/static', express.static('public'));
