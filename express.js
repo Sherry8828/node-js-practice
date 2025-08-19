@@ -45,6 +45,9 @@ app.get('/user/:id', (req, res) => {
     res.send(`User ID is ${userId} and name is ${req.query.name || 'unknown'}`);
 });
 
+//靜態檔案服務 /static/20230919_155204.jpg
+app.use('/static', express.static('public'));
+
 
 //啟動伺服器網址:http://localhost:3000
 app.listen(3000, () => {
