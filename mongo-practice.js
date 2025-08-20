@@ -1,16 +1,20 @@
 const mongo = require('mongodb');
-const uri = 'mongodb+srv://root:root123@cluster-nodejs.eeleemc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-nodeJS';
+const uri = 'mongodb+srv://root:root8828@cluster-nodejs.eeleemc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&appName=Cluster-nodeJS';
 const dbName = 'mydatabase';
  console.log("test");
-const MongoClient =new mongo.MongoClient(uri);
+const client =new mongo.MongoClient(uri);
  console.log("test2");
-MongoClient.connect(async function(err){
-    console.log("error");
-    if (err) {
+async function main() {
+    try {
+        await client.connect();
+        console.log("連接成功");
+        // 這裡可以進行資料庫操作
+    } catch (err) {
         console.log("連接失敗", err);
-        return;
+    } finally {
+        await client.close();
+        console.log("連接關閉");
     }
-    console.log("連接成功");
-    MongoClient.close();
-})
+}
 
+main();
