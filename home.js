@@ -33,7 +33,7 @@ app.get('/city', (req, res) => {
     else if (name === 'taipei') {
         res.render("city.ejs", { name: "台北市", population: 2500000, description: "台北市是台灣的首都，擁有豐富的文化和歷史遺產，是一個現代化與傳統並存的城市。" });
     } else {
-        res.status(400).send('Invalid city name');
+        res.redirect("https://www.google.com/search?q=" + name);
     }
 });
 

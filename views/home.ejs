@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
 </head>
+
 <body>
     <h3>這是網頁練習</h3>
     <a href="/city?city=taipei">台北簡介</a>
     <a href="/city?city=kaohsiung">高雄簡介</a>
-    <hr/>
+    <hr />
     <a href="/hello">Hello</a>
-    <br/>
-    <br/>
-    <img src="/static/20230919_155204.jpg" alt="靜態圖片" width="300px"/>
+    <br />
+    <br />
+    <img src="/static/20230919_155204.jpg" alt="靜態圖片" width="300px" />
+    <h3>表單輸入</h3>
+    <form action="/city" method="get">
+        <label for="city">請輸入城市名稱:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">送出</button>
+    </form>
 </body>
+
 </html>
