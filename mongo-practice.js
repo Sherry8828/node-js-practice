@@ -1,5 +1,5 @@
 const mongo = require('mongodb');
-const uri = 'mongodb+srv://root:root8828@cluster-nodejs.eeleemc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&appName=Cluster-nodeJS';
+const uri = 'mongodb+srv://root:xxxxx@cluster-nodejs.eeleemc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&appName=Cluster-nodeJS';
 const dbName = 'mydatabase';
  console.log("test");
 const client =new mongo.MongoClient(uri);
