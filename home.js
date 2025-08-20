@@ -10,6 +10,8 @@ app.set('views', "./views");
 
 //靜態檔案服務 /static/20230919_155204.jpg
 app.use('/static', express.static('public'));
+app.use(express.urlencoded({ extended: true })); //解析URL編碼的請求體
+
 
 
 
@@ -19,8 +21,8 @@ app.get('/', (req, res) => {
     res.render('home.ejs');
 });
 
-app.get('/hello', (req, res) => {
-    const name = req.query.name || 'World'; //從查詢字串中獲取name參數，若沒有則預設為'World'
+app.post('/hello', (req, res) => {
+    const name = req.body.name || 'World'; //從查詢字串中獲取name參數，若沒有則預設為'World'
     res.send(`Hello, ${name}!`); //回應一段文字
 });
 
