@@ -24,7 +24,7 @@ async function main() {
         console.log("查詢結果:", findResult);*/
 
         //example: 更新資料
-        let updateResult = await collection.updateOne({ _id: new mongo.ObjectId("68a6eb52fc46f0c0357b2e86") },
+        /*let updateResult = await collection.updateOne({ _id: new mongo.ObjectId("68a6eb52fc46f0c0357b2e86") },
             { $set: { name: "test6" } });
         console.log("更新結果數量:", updateResult.modifiedCount);
         findResult = await collection.find({}).toArray();
@@ -33,9 +33,13 @@ async function main() {
         let updateResults = await collection.updateMany(
             {}, // 查詢條件，空物件代表全部
             { $set: { role: "reader" } });
-        console.log("批量更新結果數量:", updateResults.modifiedCount);
+        console.log("批量更新結果數量:", updateResults.modifiedCount);*/
 
         //example: 刪除資料
+        let deleteResult = await collection.deleteOne({ _id: new mongo.ObjectId("68a6e91194148e936d67f956") });
+        console.log("刪除結果數量:", deleteResult.deletedCount);
+        findResult = await collection.find({}).toArray();
+        console.log("刪除後查詢結果:", findResult);
 
         // 這裡可以進行資料庫操作
     } catch (err) {
