@@ -1,5 +1,6 @@
+require('dotenv').config();
 const mongo = require('mongodb');
-const uri = 'mongodb+srv://root:xxxxx@cluster-nodejs.eeleemc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&appName=Cluster-nodeJS';
+const uri = process.env.MONGO_URI;
 const dbName = 'mydatabase';
  console.log("test");
 const client =new mongo.MongoClient(uri);
