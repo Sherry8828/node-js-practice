@@ -61,6 +61,26 @@ app.post("/register",async (req,res)=>{
 
 });
 
+app.post('/login',async (req,res)=>{
+    const {email,password}=req.body;
+    const collection=db.collection('member');
+    let result=await collection.findOne({email:email,password:password});
+    if(result===null){
+        res.redirect('/error?msg=帳號或密碼錯誤');
+        return;
+    }
+    console.log("登入成功",result);
+    //紀錄會員資料到session
+    req.session.member=result;
+    res.redirect('/member');
+});
+
+app.get('/logout', (req,res)=>{
+    req.session.destroy();
+    res.redirect('/');  
+
+});
+
 app.listen(3000,()=>{
     console.log("伺服器已啟動");
 });
