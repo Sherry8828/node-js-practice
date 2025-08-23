@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h3>會員專區</h3>
-    <div>哈囉， 歡迎光臨</div>
+    <div>哈囉， <%= member.name %> 歡迎光臨</div>
+    <h3>所有會員資料</h3>
+
+    <% for(let i=0;i<data.length; i++){ %>
+        <div> <%= data[i].name %></div>
+        <% } %>
+
     <a href="/logout">登出</a>
 </body>
+
 </html>
