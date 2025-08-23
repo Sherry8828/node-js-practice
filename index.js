@@ -12,9 +12,6 @@ async function main(){
         let collection=db.collection('member');
         }catch(err){
         console.log("連接失敗",err);
-    }finally{
-        await client.close();
-        console.log("連接關閉");
     }
 }
 main().catch(console.error);
@@ -46,6 +43,22 @@ app.get('/member',(req,res)=>{
 app.get('/error',(req,res)=>{
     const msg=req.query.msg;
     res.render('error.ejs',{msg});
+});
+
+app.post("/register",async (req,res)=>{
+    const {name,password,email}=req.body;
+    const collection=db.collection('member');
+    let result=await collection.findOne({email:email});
+
+    if(result!== null ){
+        res.redirect('/error?msg=此電子郵件已被註冊');
+        return;
+    }
+
+    result=await collection.insertOne({name, password, email});
+    console.log("會員註冊成功",result.insertedId);
+    res.redirect('/');
+
 });
 
 app.listen(3000,()=>{
