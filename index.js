@@ -33,6 +33,21 @@ app.set('view engine','ejs');
 app.set('views','./views');
 app.use(express.urlencoded({extended:true}));//處理post請求
 app.use(express.static('public'));//設定靜態檔案目錄
+
+//路由設定
+app.get('/',(req,res)=>{
+    res.render("index.ejs",{user:req.session.user});
+});
+
+app.get('/member',(req,res)=>{
+    res.render('member.ejs');
+});
+
+app.get('/error',(req,res)=>{
+    const msg=req.query.msg;
+    res.render('error.ejs',{msg});
+});
+
 app.listen(3000,()=>{
     console.log("伺服器已啟動");
 });
